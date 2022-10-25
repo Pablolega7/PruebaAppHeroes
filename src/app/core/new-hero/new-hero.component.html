@@ -1,0 +1,48 @@
+
+
+<div class="container centerCustom">
+    <mat-toolbar>
+        <span>Create Heroes</span>
+     </mat-toolbar>
+     <mat-card style="margin-top: 10px">
+        <form [formGroup]="form" >
+            <mat-grid-list cols="4" rowHeight="80px">
+                <mat-grid-tile [colspan]="4" [rowspan]="1">
+                    <mat-form-field class="ancho">
+                        <mat-label>Characters</mat-label>
+                        <input matInput autocomplete="of" class="title"  formControlName="characters" type="text" placeholder="Characters...">
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="4" [rowspan]="1">
+                    <mat-form-field class="ancho">
+                        <mat-label >Power</mat-label>
+                        <input matInput autocomplete="of"  class="title"  formControlName="power" type="text" placeholder="Power...">
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="4" [rowspan]="1">
+                    <mat-form-field class="ancho">
+                        <mat-label>Superhero</mat-label>
+                        <input matInput autocomplete="of"  class="title"  formControlName="superhero"  type="text" placeholder="Superhero...">
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="4" [rowspan]="1">
+                    <mat-form-field class="ancho">
+                        <mat-label>Publisher</mat-label>
+                        <mat-select formControlName="publisher"  >
+                          <mat-option *ngFor="let item of publisher" [value]="item" >
+                            {{item}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="4" [rowspan]="1">
+                    <button [disabled]="form.invalid" type="submit" mat-raised-button color="primary"(click)="saveHeroe()" class="me">Create</button>
+                    <button routerLink="/dashboard" type="button"  mat-raised-button color="warn"> Cancel  </button>
+                </mat-grid-tile>
+            </mat-grid-list>
+        </form>
+    </mat-card>
+</div>
+
+
+

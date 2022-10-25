@@ -1,0 +1,102 @@
+<div class="container">
+  <mat-toolbar>
+    <span>Heroes</span>
+    <div class="example-spacer"></div>
+    <button mat-raised-button color="primary" routerLink="/newhero">
+      <mat-icon>add_circle</mat-icon>
+    </button>
+  </mat-toolbar>
+  <div *ngIf="heroes$ | async">
+    <mat-form-field appearance="standard">
+      <mat-label>Search</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Batman" #input autocomplete="of">
+    </mat-form-field>
+
+    <ng-container *ngIf="(loading$ |async)">
+
+      <div class="centerCustom">
+
+        <mat-spinner></mat-spinner>
+      </div>
+    </ng-container>
+
+    <ng-container>
+
+      <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" matSort>
+
+          <!-- ID Columna -->
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
+            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+          </ng-container>
+
+          <!-- Characters Columna -->
+          <ng-container matColumnDef="characters">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Characters </th>
+            <td mat-cell *matCellDef="let element"> {{element.characters | uppercase}} </td>
+          </ng-container>
+
+          <!-- Favorite Columna -->
+          <ng-container matColumnDef="favorite">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Favorite </th>
+            <td mat-cell *matCellDef="let element">
+              <a class="pointer" [class.starBlack]="!element.favorite" [class.starYellow]="element.favorite"
+                matTooltip="Add Favorite">
+                <mat-icon>star</mat-icon>
+              </a>
+            </td>
+          </ng-container>
+
+          <!-- Power Columna -->
+          <ng-container matColumnDef="power">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Power </th>
+            <td mat-cell *matCellDef="let element"> {{element.power}} </td>
+          </ng-container>
+
+          <!-- SuperHero Columna -->
+          <ng-container matColumnDef="superhero">
+            <th mat-header-cell *matHeaderCellDef> Superhero </th>
+            <td mat-cell *matCellDef="let element"> {{element.superhero}} </td>
+          </ng-container>
+
+          <!-- Publisher Columna -->
+          <ng-container matColumnDef="publisher">
+            <th mat-header-cell *matHeaderCellDef style="position: relative; right:60px"> Publisher </th>
+            <td mat-cell *matCellDef="let element"> {{element.publisher}} </td>
+          </ng-container>
+
+          <!-- Tools Columna -->
+          <ng-container matColumnDef="tools">
+            <th mat-header-cell *matHeaderCellDef>Tools</th>
+            <td mat-cell *matCellDef="let element; let i=index" style="text-align: center">
+              <div style="display: flex;">
+                <a class="pointer me" (click)="saveHero(element)" style="color:black;" matTooltip="Add Favorite">
+                  <mat-icon>star_border</mat-icon>
+                </a>
+                <a class="pointer me" style="color: green;" matTooltip="Edit Heroe"
+                  [routerLink]="['/edithero/'+element.id]">
+                  <mat-icon>edit</mat-icon>
+                </a>
+                <a class="pointer me" style="color: red;" matTooltip="Delete Heroe" (click)="deleteHeroes(element.id)">
+                  <mat-icon>delete</mat-icon>
+                </a>
+              </div>
+            </td>
+          </ng-container>
+
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
+          aria-label="Select page of periodic elements">
+        </mat-paginator>
+      </div>
+      <h2 *ngIf="!(heroes$ |async)">
+        There is no hero in the list
+      </h2>
+
+    </ng-container>
+  </div>
+</div>

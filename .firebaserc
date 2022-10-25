@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "app-heroes-prueba": {
+      "hosting": {
+        "PruebaApp": [
+          "app-heroes-prueba"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "app-heroes-prueba"
+  }
+}

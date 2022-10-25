@@ -1,0 +1,47 @@
+<div class="container centerCustom">
+    <mat-toolbar>
+        <span>Edit Heroes</span>
+    </mat-toolbar>
+    <mat-card style="margin-top: 10px">
+        <form>
+            <mat-grid-list cols="4" rowHeight="80px">
+                <mat-grid-tile [colspan]="4" [rowspan]="1">
+                    <mat-form-field class="ancho">
+                        <mat-label>Characters</mat-label>
+                        <input name="characters" [(ngModel)]="characters" matInput autocomplete="of" />
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="4" [rowspan]="1">
+                    <mat-form-field class="ancho">
+                        <mat-label>Power</mat-label>
+                        <input name="power" [(ngModel)]="power" matInput autocomplete="of" />
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="4" [rowspan]="1">
+                    <mat-form-field class="ancho">
+                        <mat-label>Superhero</mat-label>
+                        <input name="superhero" [(ngModel)]="superhero" matInput autocomplete="of" />
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="4" [rowspan]="1">
+                    <mat-form-field class="ancho">
+                        <mat-label>Publisher</mat-label>
+                        <mat-select name="publisher" [(ngModel)]="publisher">
+                            <mat-option *ngFor="let item of publisherOpt" [value]="item">
+                                {{ item }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="4" [rowspan]="1">
+                    <button type="submit" (click)="editHero()" mat-raised-button color="primary" class="me">
+                        Edit
+                    </button>
+                    <button type="button" routerLink="/dashboard" mat-raised-button color="warn">
+                        Cancel
+                    </button>
+                </mat-grid-tile>
+            </mat-grid-list>
+        </form>
+    </mat-card>
+</div>
